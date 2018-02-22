@@ -1,5 +1,5 @@
 library(pacman)
-p_load(dplyr, ggplot2, reshape2)
+p_load(dplyr, ggplot2)
 
 
 ribbon <- function(x0, y0, h0, x1, y1, h1, stepsize = 0.05) {
@@ -19,11 +19,12 @@ ribbon <- function(x0, y0, h0, x1, y1, h1, stepsize = 0.05) {
 
 fill <- "grey70"
 color <- "grey30"
+alpha <- 0.5
 ggplot(data.frame(), aes(x = x, ymin = ymin, ymax = ymax)) + 
-  geom_ribbon(data = ribbon(1, 1.25, 1.5, 3, 1, 1.5), fill = fill, color = color) +
-  geom_ribbon(data = ribbon(1, 2.75, 1, 3, 3, 1), fill = fill, color = color) +
-  geom_ribbon(data = ribbon(3, 1, 1, 5, 0.75, 1), fill = fill, color = color) +
-  geom_ribbon(data = ribbon(3, 2, 0.5, 5, 1.875, 0.5), fill = fill, color = color) +
+  geom_ribbon(data = ribbon(1, 1.25, 1.5, 3, 1, 1.5), fill = fill, color = color, alpha = alpha) +
+  geom_ribbon(data = ribbon(1, 2.75, 1, 5, 3, 1), fill = fill, color = color, alpha = alpha) +
+  geom_ribbon(data = ribbon(3, 1, 1, 5, 0.75, 1), fill = fill, color = color, alpha = alpha) +
+  geom_ribbon(data = ribbon(3, 2, 0.5, 5, 1.875, 0.5), fill = fill, color = color, alpha = alpha) +
   xlim(0, 6) + ylim(0, 5)
 
 # Seems like heights of parent + child should be the same for a particular ribbon, given the context
