@@ -18,3 +18,17 @@ combined <- node_relationships %>%
 # (x1, y1, h1) = (xpos_c, ypos_c, size_c)
 
 
+coord_list <- vector("list", length = nrow(combined))
+for (i in seq_along(combined$node)) {
+  r <- combined[i, ]
+  
+  if (!is.na(r$child)) {
+    df <- ribbon(r$xpos_p, r$ypos_p, r$size_p, r$xpos_c, r$ypos_c, r$size_c)
+    df$id <- paste0(r$node, r$child)
+    coord_list[[i]] <- df
+  }
+}
+
+coord_df <- bind_rows(coord_list)
+ggplot(coord_df, aes(x = x, ymin = ymin, ymax = ymax)) + 
+  geom_ribbon(aes(x = x, ymin = ymin, ymax = ymax, group = id), fill = "grey70", color = "black") # This looks ridiculous because I didn't account for splitting parent nodes

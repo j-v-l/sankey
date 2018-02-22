@@ -2,7 +2,7 @@ library(pacman)
 p_load(dplyr, ggplot2)
 
 
-ribbon <- function(x0, y0, h0, x1, y1, h1, stepsize = 0.05) {
+ribbon <- function (x0, y0, h0, x1, y1, h1, stepsize = 0.05) {
   # Create a df to pass to geom_ribbon that will draw a ribbon from (x0, y0) to (x1, y1), 
   # with height (above the base points) going from h0 to h1
   
